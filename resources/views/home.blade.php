@@ -7,7 +7,6 @@
     <title>Shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a6a989f522.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
     <nav class="navbar navbar-light navbar-expand-md bg-light px-md-5">
@@ -15,105 +14,32 @@
         <div class="collapse navbar-collapse">
             <div class="navbar-nav">
                 <a class="nav-link" href="{{ Route("home") }}">Home</a>
-                <a class="nav-link" href="{{ Route("categoria") }}">Categorias</a>
                 <a class="nav-link" href="{{ Route("cadastrar") }}">Cadastrar</a>
             </div>
         </div>
-        <a href="#" class="btn btn-sm"><i class="fa fa-shopping-cart"></i></a>
+        <a href="{{ Route('carrinho') }}" class="btn btn-sm"><i class="fa fa-shopping-cart"></i></a>
     </nav>
-
+    @if(Session::has('success'))
+    <p class="alert alert-success">{{ Session::get('success') }}</p>
+    @endif
     <div class="container">
         <div class="row">
+            @foreach ($data as $item)
             <div class="col-3 my-5">
                 <div class="card">
-                    <img src="./images/produto1.png" "card-img-top" />
+                    <img src="./images/{{ $item->foto }}" "card-img-top" />
                     <div class="card-body">
-                        <h6 class="card-title">Pelúcia Copo de Café - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
+                        <h6 class="card-title">{{ $item->nome }}</h6>
+                        <h3>{{ $item->valor }}</h3>
+                        <form action="{{ Route('store_carrinho', $item->id) }}" method="post">
+                        @csrf
+                        <input type="number" name="quantidade">
+                        <button class="btn btn-sm btn-secondary">Adicionar Item</button>
+                    </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto2.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Pelúcia SuperDog - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto3.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Barra de Proteína - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto4.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Bola Spike - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto5.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Bolástica - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto6.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Pelúcia Escudo do Herói - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto7.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Pelúcia Noel - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto8.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Pelúcia Zeca, o Zumbi - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto9.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Pelúcia Waffle Happy - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 my-5">
-                <div class="card">
-                    <img src="./images/produto10.png" "card-img-top" />
-                    <div class="card-body">
-                        <h6 class="card-title">Mordedor Dental Xô, Bafinho - Petiko</h6>
-                        <a href="#" class="btn btn-sm btn-secondary">Adicionar Item</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </body>
