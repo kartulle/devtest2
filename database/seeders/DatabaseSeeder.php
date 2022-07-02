@@ -20,7 +20,18 @@ class DatabaseSeeder extends Seeder
             'valor' => '00',
             'foto' => 'produto1.png',
             'descricao' => '',
-            'categoria_id' => '1',
+        ]);
+        Produto::create([
+            'nome' => 'produto2',
+            'valor' => '00',
+            'foto' => 'produto2.png',
+            'descricao' => '',
+        ]);
+        Produto::create([
+            'nome' => 'produto3',
+            'valor' => '00',
+            'foto' => 'produto3.png',
+            'descricao' => '',
         ]);
     }
 }
